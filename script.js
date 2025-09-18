@@ -142,3 +142,48 @@ loadCategory();
 loadFoods(11);
 
 // loadRandomData();
+
+
+const addtoCart = (btn) => {
+  const card = btn.parentNode.parentNode;
+
+  const foodTitle = card.querySelector(".food-title").innerText;
+
+  const foodImg = card.querySelector(".food-img").src;
+
+  const foodPrice = card.querySelector(".food-price").innerText;
+
+  const foodPriceNum = Number(foodPrice);
+
+  //   console.log(foodTitle, foodImg, foodPriceNum);
+
+  const isExist = cart.find((item) => item.foodTitle == foodTitle);
+  if (isExist) {
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].foodTitle == foodTitle) {
+        cart[i].quantity++;
+        break;
+      }
+    }
+  } else {
+    const selectedItem = {
+      id: cart.length + 1,
+      quantity: 1,
+      foodTitle: foodTitle,
+      foodImg: foodImg,
+      foodPrice: foodPriceNum,
+    };
+
+    cart.push(selectedItem);
+  }
+  console.log(cart);
+
+  total = total + foodPriceNum;
+
+  displayCart(cart);
+  displayTotal(total);
+};
+
+const displayTotal = (val) => {
+  document.getElementById("cart-total").innerHTML = val;
+};
