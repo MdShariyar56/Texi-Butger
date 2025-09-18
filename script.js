@@ -112,3 +112,33 @@ const displayFoods = (foods) => {
   document.getElementById("loading-spinner").classList.add("hidden");
   document.getElementById("food-container").classList.remove("hidden");
 };
+
+///////////////////////////////////
+
+const loadFoodDetails = (id) => {
+  const url = `https://taxi-kitchen-api.vercel.app/api/v1/foods/${id}`;
+
+  fetch(url) // promise kortesi j ami tomake response
+    .then((res) => res.json()) //promise kortesi ami tomake data
+    .then((data) => displayDetails(data.details)); //object
+};
+const displayDetails = (food) => {
+  const detailsContainer = document.getElementById("details-container");
+  detailsContainer.innerHTML = "";
+  const ecode = food.video.split("=")[1];
+  console.log(food.video.split("=")[1]);
+
+  detailsContainer.innerHTML = `
+        <iframe width="800" height="430" src="https://www.youtube.com/embed/${ecode}?si=mtV9WFTunGfEXlK8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+  
+  `;
+  document.getElementById("my_modal_3").showModal();
+};
+
+///////////////////////////////////////
+
+loadCategory();
+loadFoods(11);
+
+// loadRandomData();
