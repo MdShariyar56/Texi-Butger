@@ -57,3 +57,58 @@ const loadFoods = (id) => {
     .then((res) => res.json()) //promise kortesi ami tomake data
     .then((data) => displayFoods(data.foods));
 };
+const loadRandomData = () => {
+  const url = `https://taxi-kitchen-api.vercel.app/api/v1/foods/random`;
+  fetch(url) // promise kortesi j ami tomake response
+    .then((res) => res.json()) //promise kortesi ami tomake data
+    .then((data) => displayFoods(data.foods));
+};
+const displayFoods = (foods) => {
+  const foodContainer = document.getElementById("food-container");
+  foodContainer.innerHTML = "";
+
+  foods.forEach((food) => {
+    const foodCard = document.createElement("div");
+    foodCard.innerHTML = `
+     <div onclick="loadFoodDetails(${food.id})" class="p-5 bg-white flex gap-3 shadow rounded-xl">
+            <div class="img flex-1">
+              <img
+                src="${food.foodImg}"
+                alt=""
+                
+                class="w-[160px] rounded-xl h-[160px] object-cover food-img"
+              />
+            </div>
+            <div class="flex-2">
+              <h1 class="text-xl font-bold food-title">
+                ${food.title}
+              </h1>
+
+              <div class="badge badge-warning">${food.category}</div>
+
+              <div class="divider divider-end">
+                <h2 class="text-yellow-600 font-semibold">
+                  $ <span class="food-price">${food.price}</span> BDT
+                </h2>
+              </div>
+
+              <button id="add-btn-${food.id}" onclick="addtoCart(this)" class="btn btn-warning">
+                <i class="fa-solid fa-square-plus"></i>
+                Add This Item
+              </button>
+            </div>
+          </div>
+    `;
+    foodContainer.append(foodCard);
+
+    document
+      .getElementById(`add-btn-${food.id}`)
+      .addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+  });
+
+  //2 - food container k show korbo + loading k hide korbo
+  document.getElementById("loading-spinner").classList.add("hidden");
+  document.getElementById("food-container").classList.remove("hidden");
+};
