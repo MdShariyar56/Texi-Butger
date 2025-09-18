@@ -225,3 +225,18 @@ const displayCart = (cart) => {
     cartContainer.append(newItem);
   }
 };
+const removeCart = (btn) => {
+  const item = btn.parentNode;
+
+  const id = Number(item.querySelector(".cart-id").innerText);
+
+  const foodPrice = Number(item.querySelector(".item-price").innerText);
+
+  cart = cart.filter((item) => item.id != id);
+
+  total = 0;
+  cart.forEach((item) => (total += item.foodPrice));
+
+  displayCart(cart);
+  displayTotal(total);
+};
