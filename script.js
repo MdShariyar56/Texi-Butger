@@ -31,3 +31,29 @@ const displayCategory = (categories) => {
     catContainer.append(categoryCard);
   }
 };
+
+///////////////////////////////////////////
+
+const loadFoods = (id) => {
+  //1 - food container k hide korbo + loading k show korbo
+  document.getElementById("loading-spinner").classList.remove("hidden");
+  document.getElementById("food-container").classList.add("hidden");
+
+  const url = id
+    ? `https://taxi-kitchen-api.vercel.app/api/v1/categories/${id}`
+    : `https://taxi-kitchen-api.vercel.app/api/v1/foods/random`;
+
+  //1 - sobaike niye eshe active class remove kore dao.
+
+  const catBtns = document.querySelectorAll(".btn-category");
+  catBtns.forEach((btn) => btn?.classList?.remove("active"));
+
+  //2 - Jake click kora hoise take active class dao
+  const currentBtn = document.getElementById(`cat-btn-${id}`);
+  console.log(currentBtn);
+  currentBtn?.classList?.add("active");
+
+  fetch(url) // promise kortesi j ami tomake response
+    .then((res) => res.json()) //promise kortesi ami tomake data
+    .then((data) => displayFoods(data.foods));
+};
