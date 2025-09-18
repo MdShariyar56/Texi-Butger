@@ -187,3 +187,41 @@ const addtoCart = (btn) => {
 const displayTotal = (val) => {
   document.getElementById("cart-total").innerHTML = val;
 };
+const displayCart = (cart) => {
+  const cartContainer = document.getElementById("cart-container");
+  cartContainer.innerHTML = "";
+  for (let item of cart) {
+    const newItem = document.createElement("div");
+    newItem.innerHTML = `
+     <div class="p-1 bg-white flex gap-3 shadow rounded-xl relative">
+            <div class="img">
+              <span class="hidden cart-id">${item.id}</span>
+              <img
+                src="${item.foodImg}"
+                alt=""
+                class="w-[50px] rounded-xl h-[50px] object-cover"
+              />
+            </div>
+            <div class="flex-1">
+              <h1  class="text-xs font-bold food-title">
+                ${item.foodTitle}
+              </h1>
+
+              <div class="">
+                <h2 class="text-yellow-600 font-semibold">
+                 ${item.quantity} x $ <span class="item-price">${item.foodPrice}</span> BDT
+                </h2>
+                
+              </div>
+            </div>
+            <div onclick="removeCart(this)"
+              class="w-6 h-6 flex justify-center items-center bg-red-600 rounded-full absolute -top-1 -right-1 text-white cursor-pointer"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+          </div>
+    `;
+
+    cartContainer.append(newItem);
+  }
+};
