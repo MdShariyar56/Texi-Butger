@@ -240,3 +240,4 @@ const removeCart = (btn) => {
   displayCart(cart);
   displayTotal(total);
 };
+ 
