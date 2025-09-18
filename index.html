@@ -38,10 +38,48 @@
       referrerpolicy="no-referrer"
     />
 
+      <style>
+      * {
+        font-family: "Mooli", sans-serif;
+      }
+
+      .bg-art {
+        background: linear-gradient(
+            rgba(255, 252, 252, 0.884),
+            rgba(255, 252, 252)
+          ),
+          url("assets/bg.png");
+        background-size: 400px; /* make image cover full area */
+        background-position: center; /* center the image */
+        background-attachment: fixed;
+      }
+      .active {
+        background-color: black;
+        color: white;
+      }
+    </style>
+
   </head>
   <body class="bg-art">
-    <h1>Shariyar</h1>
+    <header
+      class="flex flex-col gap-5 justify-center items-center min-h-screen"
+    >
+      <div class="">
+        <img src="./assets/logo.png" alt="" class="w-[450px]" />
+      </div>
 
-    <script src="./script/index.js"></script>
+      <div
+        class="w-20 h-20 flex items-center justify-center animate-bounce bg-[#FEBF00] mt-10 rounded-full shadow-xl justify-self-end"
+      >
+        <i class="fa-solid fa-arrow-down text-xl"></i>
+      </div>
+      <h1
+        class="w-full sticky bottom-0 text-center text-xl font-bold p-4 bg-[#FEBF00] rounded"
+      >
+        Digital Menu Card For Our Lovely Customer
+      </h1>
+    </header>
+
+    <script src="./script.js"></script>
   </body>
 </html>
